@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class CrewPoint extends Model
+{
+    use HasFactory;
+
+    protected $table = 'crewpoints';
+
+    protected $fillable = [
+        'user_id',
+        'penilaian_id',
+        'poin',
+    ];
+
+    public function penilaian()
+    {
+        return $this->belongsTo(Penilaian::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}
