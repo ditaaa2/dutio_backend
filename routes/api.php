@@ -27,6 +27,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [AuthController::class, 'profile']);
     Route::put('/profile', [AuthController::class, 'updateProfile']);
 
+    // Registrasi perangkat untuk notifikasi
+    Route::post('/device/register', [AuthController::class, 'registerDevice']);
+
     // Update Password
     Route::post('/change-password', [AuthController::class, 'updatePassword']);
 

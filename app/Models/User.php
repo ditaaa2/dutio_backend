@@ -11,6 +11,7 @@ use App\Models\Jadwal;
 use App\Models\Laporan;
 use App\Models\Penghuni;
 use App\Models\CrewPoint;
+use App\Models\UserDevice;
 
 class User extends Authenticatable
 {
@@ -56,5 +57,11 @@ class User extends Authenticatable
     public function penghuni()
     {
         return $this->hasOne(Penghuni::class);
+    }
+
+    // Relasi dengan perangkat pengguna
+    public function devices()
+    {
+        return $this->hasMany(UserDevice::class);
     }
 }

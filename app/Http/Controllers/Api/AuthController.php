@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserDevice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -157,4 +158,32 @@ class AuthController extends Controller
             'message' => 'Logout berhasil!',
         ]);
     }
+
+
+    // REGISTER DEVICE UNTUK NOTIFIKASI
+    public function registerDevice(Request $request)
+    {
+        $validated = $request->validate([
+            'fid' => 'required|string|max:255',
+        ]);
+
+        $user = $request->user();
+
+        $device = UserDevice::updateOrCreate(
+            [
+                'fid' => $validated['fid'],
+            ],
+            [
+                'user_id' => $user->id,
+                'last_registered_at' => now(),
+            ]
+        );
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Perangkat berhasil didaftarkan untuk notifikasi DUTIO!',
+            'device' => $device,
+        ], 200);
+    }
+
 }
